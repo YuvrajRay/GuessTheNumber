@@ -1,4 +1,5 @@
 const value = Math.round(Math.random() * 100); // generatin random value between 0 and 100.
+console.log(value);
 
 let count = 0  //Initiate count at 0
 
