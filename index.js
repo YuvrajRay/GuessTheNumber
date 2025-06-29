@@ -52,7 +52,7 @@ document.getElementById('start').addEventListener('click', function (e) {
 //Function to take input value
 function submitFunction(count) {
     const inputVal = parseInt(document.getElementById('input').value);
-    if (! Number.isNaN(inputVal)) {
+    if (!Number.isNaN(inputVal)) {
         document.getElementById('input').value = ''
         compare(inputVal, count);
         updateBtn(count);
@@ -64,7 +64,12 @@ function submitFunction(count) {
 //Function to compare value and print comment
 function compare(inputVal, count) {
     if (count > 10) {
-        opString(`You lost! The number was ${value}`)
+        opString(`You lost! The number was ${value}`);
+        const startBtn = document.getElementById('start')
+        const submitBtn = document.getElementById('submitBtn');
+        startBtn.classList.remove('disable');
+        submitBtn.classList.add('disable');
+
     }
     else if (inputVal > value) {
         opString('Too High!');
@@ -106,8 +111,24 @@ function answer(val) {
 
 //Final comment
 function win(val) {
+    const startBtn = document.getElementById('start');
+    const submitBtn = document.getElementById('submitBtn');
+    console.log('start',startBtn, 'submit', submitBtn)
+    startBtn.classList.remove('disable');
+    submitBtn.classList.add('disable');
+    console.log('start',startBtn, 'submit', submitBtn);
+
     const comment = document.getElementById('comment');
-    comment.innerText = 'You got it, Congrats'
+
+    if (comment) {
+        comment.innerText = 'You got it, Congrats'
+    } else {
+        const comment = document.createElement('div');
+        comment.id = "comment";
+        comment.innerText = "You got it, Congrats";
+        document.getElementById('container').appendChild(comment)
+    }
+    
 
     const ans = document.getElementById('answerString')
     if (ans) {
