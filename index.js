@@ -1,4 +1,4 @@
-const value = Math.round(Math.random() * 100); // generatin random value between 0 and 100.
+let value = Math.round(Math.random() * 100); // generatin random value between 0 and 100.
 console.log(value);
 
 let count = 0  //Initiate count at 0
@@ -15,10 +15,6 @@ function updateBtn(countVal) {
     } else if (countVal <= 10) {
         startBtn.classList.add('disable');
         submitBtn.classList.remove('disable')
-    } else {
-        startBtn.classList.remove('disable');
-        submitBtn.classList.add('disable');
-
     }
 }
 
@@ -41,7 +37,9 @@ document.getElementById('submitBtn').addEventListener('click', function (e) {
 
 //Handle Start Button
 document.getElementById('start').addEventListener('click', function (e) {
-    count += 1;
+    count = 1;
+    value = Math.round(Math.random() * 100);
+
     if (document.getElementById('comment')) {
         document.getElementById('comment').remove();
     }
@@ -54,11 +52,16 @@ document.getElementById('start').addEventListener('click', function (e) {
 //Function to take input value
 function submitFunction(count) {
     const inputVal = parseInt(document.getElementById('input').value);
-    compare(inputVal, count);
-    updateBtn();
+    if (! Number.isNaN(inputVal)) {
+        document.getElementById('input').value = ''
+        compare(inputVal, count);
+        updateBtn(count);
+    } else {
+        alert('Empty Input')
+    }
 }
 
-//FUnction to compare value and print comment
+//Function to compare value and print comment
 function compare(inputVal, count) {
     if (count > 10) {
         opString(`You lost! The number was ${value}`)
